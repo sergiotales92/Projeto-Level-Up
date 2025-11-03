@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Level Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/jpeg" href="/imagens/capa.jpg">
+</head>
+<body>
+
+    <header class="profile-edit-header">
+        <h1>Configurações</h1>
+        <a href="home.html" class="back-link">Voltar ao Início</a>
+    </header>
+
+    <main class="profile-page-wrapper">
+        <div class="settings-container">
+
+            <section class="settings-section">
+                <h2>Conta</h2>
+                <a href="profile.html" class="setting-item-link">
+                    <div class="setting-text">
+                        <h3>Editar Perfil</h3>
+                        <p>Altere o seu nickname, bio e jogos favoritos.</p>
+                    </div>
+                    <div class="setting-control">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+                 <a href="trocar-conta.html" class="setting-item-link">
+                    <div class="setting-text">
+                        <h3>Gerir Contas</h3>
+                        <p>Adicione ou remova contas salvas neste dispositivo.</p>
+                    </div>
+                    <div class="setting-control">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </section>
+
+            <section class="settings-section">
+                <h2>Privacidade e Segurança</h2>
+                <div class="setting-item" id="manage-blocked-users">
+                    <div class="setting-text">
+                        <h3>Gerir Utilizadores Bloqueados</h3>
+                        <p>Veja e desbloqueie utilizadores.</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="setting-button">Gerir</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="settings-section">
+                <h2>Sobre</h2>
+                 <div class="setting-item">
+                    <div class="setting-text">
+                        <h3>Versão da App</h3>
+                    </div>
+                    <div class="setting-control">
+                        <p>1.0.0</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h2>Zona de Perigo</h2>
+                <div class="danger-zone">
+                    <div class="danger-info">
+                        <h3>Excluir sua conta</h3>
+                        <p>Isto irá apagar permanentemente o seu perfil e todos os seus dados.</p>
+                    </div>
+                    <button id="delete-account-btn" class="danger-btn">Excluir Conta</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="blocked-users-modal" class="settings-modal-overlay" style="display: none;">
+        <div class="settings-modal-content">
+            <div class="settings-modal-header">
+                <h2>Utilizadores Bloqueados</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <div id="blocked-users-list" class="blocked-users-list">
+                <p>A carregar...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-confirm-modal" class="settings-modal-overlay" style="display: none;">
+        <div class="settings-modal-content">
+            <p>Deseja realmente excluir sua conta?</p>
+            <div class="delete-confirm-actions">
+                <button id="cancel-delete-btn">Não</button>
+                <button id="confirm-delete-btn">Sim</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/settings.js"></script>
+    <div id="toast-container"></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/jpeg" href="/imagens/capa.jpg">
+</head>
+<body>
+    <header>
+        <h1>Level Up</h1>
+        <nav>
+            </nav>
+    </header>
+
+    <main id="app-content">
+        <h2>Bem-vindo! Encontre jogadores e monte sua equipe.</h2>
+        <form id="add-game-form">
+            <input type="text" id="game-name" placeholder="Digite o de um Jogo.">
+            <input type="text" id="game-image-url" placeholder="Link da sua IMAGEM">
+            <input type="submit" id="action">
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Projeto de Desenvolvimento de Sistemas</p>
+        <button id="seed-button" style="margin: 20px; padding: 10px;">Popular Banco de Dados com Dados de Teste</button>
+    </footer>
+
+    <script type="module" src="js/admin.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('Service Worker registrado com sucesso:', registration);
+          }).catch(error => {
+            console.log('Falha ao registrar o Service Worker:', error);
+          });
+        });
+      }
+    </script>
+    <div id="toast-container"></div>
+</body>
+</html>

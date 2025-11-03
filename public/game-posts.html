@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade - Level Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/comunidade.css"> 
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/jpeg" href="/imagens/capa.jpg">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar left-sidebar" id="left-sidebar">
+            <div class="sidebar-top">
+                <nav class="sidebar-nav">
+                    <a href="profile.html" title="Perfil"><i class="fas fa-user"></i></a>
+                </nav>
+            </div>
+            <div class="sidebar-main">
+                <nav class="sidebar-nav">
+                    <a href="home.html" title="Início"><i class="fas fa-home"></i></a>
+                    <a href="comunidade.html" title="Comunidade" class="active"><i class="fas fa-gamepad"></i></a>
+                    <a href="direct.html" title="Chat"><i class="fas fa-comments"></i></a>
+                    <a href="search.html" title="Adicionar"><i class="fas fa-user-plus"></i></a>
+                    <a href="friends.html" title="Amigos"><i class="fas fa-users"></i></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <nav class="sidebar-nav">
+                    <a href="settings.html" title="Configurações"><i class="fa-solid fa-gear"></i></a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-logo-mobile">Level Up</div>
+                <div class="search-bar"></div>
+                <div class="header-icons">
+                    <button id="open-post-modal" class="mobile-header-btn" title="Criar Post">
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                    <div class="notifications-menu">
+                        <button class="menu-toggle" id="notifications-menu-toggle">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge" class="notification-badge" style="display: none;">0</span>
+                        </button>
+                        <div class="notifications-dropdown" id="notifications-dropdown">
+                            <div class="dropdown-header"><h3>Notificações</h3></div>
+                            <div class="notifications-list"><p class="empty-notification">Nenhuma nova notificação</p></div>
+                            <button class="dropdown-footer" id="view-all-notifications">Ver todas</button>
+                        </div>
+                    </div>
+                    <div class="settings-menu">
+                        <button class="menu-toggle" id="settings-menu-toggle">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div class="settings-dropdown" id="settings-dropdown">
+                            <a href="#"><i class="fas fa-language"></i> <span>Linguagem</span></a>
+                            <a href="trocar-conta.html"><i class="fas fa-exchange-alt"></i> <span>Trocar de conta</span></a>
+                            <a href="mailto:suporte@squad.com"><i class="fas fa-question-circle"></i> <span>Suporte</span></a>
+                            <div class="dropdown-divider"></div>
+                            <button id="logout-button"><i class="fas fa-sign-out-alt"></i> <span>Sair</span></button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="feed">
+                <section id="posts-feed">
+                    <p>Carregando posts da comunidade...</p>
+                </section>
+                <div class="brand-footer">Level UP</div>
+            </div>
+        </main>
+    </div>
+
+    <div id="create-post-modal" class="modal-overlay">
+        <section class="create-post-card">
+            <span class="close-modal-btn">&times;</span>
+            <h3>Criar publicação na comunidade</h3>
+            <textarea id="post-text" placeholder="Compartilhe algo com a comunidade..."></textarea>
+            <div id="post-char-counter" class="char-counter">0/2000</div>
+            <div class="create-post-actions">
+                <button id="post-button">Postar</button>
+            </div>
+        </section>
+    </div>
+
+    <button id="fab-create-post" class="fab" title="Criar Post" style="bottom: 80px;">+</button>
+
+    <nav class="mobile-nav">
+        <a href="home.html" class="mobile-nav-link" title="Início"><i class="fas fa-home"></i></a>
+        <a href="comunidade.html" class="mobile-nav-link active" title="Comunidade"><i class="fas fa-gamepad"></i></a>
+        <a href="friends.html" class="mobile-nav-link" title="Amigos"><i class="fas fa-users"></i></a>
+        <a href="direct.html" class="mobile-nav-link" title="Chat" id="mobile-chat-link">
+            <i class="fas fa-comments"></i>
+            <span class="notification-dot"></span>
+        </a>
+        <a href="profile.html" class="mobile-nav-link" title="Perfil"><i class="fas fa-user"></i></a>
+        <a href="settings.html" class="mobile-nav-link" title="Configurações"><i class="fa-solid fa-gear"></i></a>
+    </nav>
+
+    <script type="module" src="js/shared-header.js"></script>
+    <script type="module" src="js/game-posts.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('Service Worker registrado com sucesso:', registration);
+          }).catch(error => {
+            console.log('Falha ao registrar o Service Worker:', error);
+          });
+        });
+      }
+    </script>
+    <div id="toast-container"></div>
+</body>
+</html>

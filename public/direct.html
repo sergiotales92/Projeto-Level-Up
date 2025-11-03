@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens Diretas</title>
+    <link rel="stylesheet" href="css/style.css"> <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/direct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="/imagens/capa.jpg">
+</head>
+<body>
+    <div class="app-container">
+
+        <aside class="sidebar left-sidebar" id="left-sidebar">
+            <div class="sidebar-top">
+                <nav class="sidebar-nav">
+                    <a href="profile.html" title="Perfil"><i class="fas fa-user"></i></a>
+                </nav>
+            </div>
+            <div class="sidebar-main">
+                <nav class="sidebar-nav">
+                    <a href="home.html" title="Início"><i class="fas fa-home"></i></a>
+                    <a href="comunidade.html" title="Comunidade"><i class="fas fa-gamepad"></i></a>
+                    <a href="direct.html" title="Chat" class="active"><i class="fas fa-comments"></i></a>
+                    <a href="search.html" title="Adicionar"><i class="fas fa-user-plus"></i></a>
+                    <a href="friends.html" title="Amigos"><i class="fas fa-users"></i></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <nav class="sidebar-nav">
+                    <a href="settings.html" title="Configurações"><i class="fa-solid fa-gear"></i></a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="main-header">
+                <h1>Mensagens Diretas</h1>
+            </header>
+
+            <div class="direct-container">
+
+                <div class="conversations-list">
+                    <div class="conversation-item-placeholder">Carregando conversas...</div>
+                </div>
+
+                <div class="chat-area">
+                    <div class="chat-placeholder">
+                        <h2>Selecione uma conversa</h2>
+                        <p>Escolha um amigo na lista ao lado para começar a conversar.</p>
+                    </div>
+
+                    <div class="chat-header"></div>
+                    <div class="chat-body"></div> <div class="chat-input-box" id="chat-input-box-desktop">
+                        <input type="file" id="media-input-desktop" accept="image/*,video/*" style="display: none;">
+                        <button class="icon-button add-media-button" data-target="media-input-desktop"><i class="fa-solid fa-plus-circle"></i></button>
+                        <input type="text" class="chat-message-input" id="chat-message-input-desktop" placeholder="Digite uma mensagem...">
+                        <button class="icon-button send-button" data-target="chat-message-input-desktop"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+
+                </div> <div class="chat-input-box" id="chat-input-box-mobile">
+                    <input type="file" id="media-input-mobile" accept="image/*,video/*" style="display: none;">
+                    <button class="icon-button add-media-button" data-target="media-input-mobile"><i class="fa-solid fa-plus-circle"></i></button>
+                    <input type="text" class="chat-message-input" id="chat-message-input-mobile" placeholder="Digite uma mensagem...">
+                    <button class="icon-button send-button" data-target="chat-message-input-mobile"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+
+            </div> </main> </div> <nav class="mobile-nav">
+        <a href="home.html" class="mobile-nav-link" title="Início"><i class="fas fa-home"></i></a>
+        <a href="comunidade.html" class="mobile-nav-link" title="Comunidade"><i class="fas fa-gamepad"></i></a>
+        <a href="friends.html" class="mobile-nav-link" title="Amigos"><i class="fas fa-users"></i></a>
+        <a href="direct.html" class="mobile-nav-link active" title="Chat" id="mobile-chat-link">
+            <i class="fas fa-comments"></i>
+            <span class="notification-dot"></span>
+        </a>
+        <a href="profile.html" class="mobile-nav-link" title="Perfil"><i class="fas fa-user"></i></a>
+        <a href="settings.html" class="mobile-nav-link" title="Configurações"><i class="fa-solid fa-gear"></i></a>
+    </nav>
+
+    <script type="module" src="js/direct.js"></script>
+    <div id="toast-container"></div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações - Level Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/notifications.css"> 
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/jpeg" href="/imagens/capa.jpg">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar left-sidebar" id="left-sidebar">
+            <div class="sidebar-top">
+                <nav class="sidebar-nav">
+                    <a href="profile.html" title="Perfil"><i class="fas fa-user"></i></a>
+                </nav>
+            </div>
+            <div class="sidebar-main">
+                <nav class="sidebar-nav">
+                    <a href="home.html" title="Início"><i class="fas fa-home"></i></a>
+                    <a href="comunidade.html" title="Comunidade"><i class="fas fa-gamepad"></i></a>
+                    <a href="direct.html" title="Chat"><i class="fas fa-comments"></i></a>
+                    <a href="search.html" title="Adicionar"><i class="fas fa-user-plus"></i></a>
+                    <a href="friends.html" title="Amigos"><i class="fas fa-users"></i></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <nav class="sidebar-nav">
+                    <a href="settings.html" title="Configurações"><i class="fa-solid fa-gear"></i></a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Minhas Notificações</h2>
+                <a href="home.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Voltar para o Início
+                </a>
+            </header>
+            
+            <div class="notifications-container">
+                <div id="requests-list">
+                    <p>Carregando notificações...</p>
+                </div>
+                <div class="brand-footer">Level UP</div>
+            </div>
+        </main>
+
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="home.html" class="mobile-nav-link" title="Início"><i class="fas fa-home"></i></a>
+        <a href="comunidade.html" class="mobile-nav-link" title="Comunidade"><i class="fas fa-gamepad"></i></a>
+        <a href="search.html" class="mobile-nav-link" title="Adicionar"><i class="fas fa-user-plus"></i></a>
+        <a href="direct.html" class="mobile-nav-link" title="Chat" id="mobile-chat-link">
+            <i class="fas fa-comments"></i>
+            <span class="notification-dot"></span>
+        </a>
+        <a href="profile.html" class="mobile-nav-link" title="Perfil"><i class="fas fa-user"></i></a>
+        <a href="settings.html" class="mobile-nav-link" title="Configurações"><i class="fa-solid fa-gear"></i></a>
+    </nav>
+
+    <script type="module" src="js/notifications.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('Service Worker registrado com sucesso:', registration);
+          }).catch(error => {
+            console.log('Falha ao registrar o Service Worker:', error);
+          });
+        });
+      }
+    </script>
+    <div id="toast-container"></div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trocar de Conta - Level Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css"> <link rel="stylesheet" href="css/trocar-conta.css"> <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/jpeg" href="/imagens/capa.jpg">
+</head>
+<body>
+
+    <header class="profile-edit-header">
+        <h1>Gerenciar Contas</h1>
+        <a href="home.html" class="back-link">Voltar ao Início</a>
+    </header>
+
+    <main class="profile-page-wrapper">
+        <div class="switch-account-container">
+            
+            <section class="saved-accounts-section">
+                <h2>Contas neste dispositivo</h2>
+                <div id="saved-accounts-list" class="saved-accounts-lis   t">
+                    </div>
+            </section>
+
+            <a href="auth.html" class="add-account-btn">
+                <i class="fas fa-plus-circle"></i>
+                <span>Adicionar ou entrar em outra conta</span>
+            </a>
+
+        </div>
+    </main>
+
+    <script type="module" src="js/trocar-conta.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('Service Worker registrado com sucesso:', registration);
+          }).catch(error => {
+            console.log('Falha ao registrar o Service Worker:', error);
+          });
+        });
+      }
+    </script>
+    <div id="toast-container"></div>
+</body>
+</html>

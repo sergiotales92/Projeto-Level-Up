@@ -1,0 +1,225 @@
+/* Garante que o layout ocupe a tela toda */
+body, html {
+    overflow: hidden;
+    height: 100%;
+    background-color: var(--cor-fundo);
+}
+
+/* Container principal da aplicação, herdado do estilo home */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- ESTILO DA BARRA LATERAL (Igual ao home.html para consistência) --- */
+.sidebar {
+    background-color: var(--cor-superficie);
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70px;
+    border-right: 1px solid #333;
+    z-index: 100;
+}
+
+.sidebar nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar nav a {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar nav a:hover, .sidebar nav a.active {
+    background-color: rgba(159, 0, 255, 0.2);
+    color: var(--cor-texto-primario);
+}
+
+.sidebar nav a i {
+    font-size: 1.3rem;
+}
+
+.sidebar-top, .sidebar-main, .sidebar-bottom {
+    width: 100%;
+}
+
+.sidebar-bottom {
+    min-height: 50px;
+}
+
+/* --- Conteúdo Principal da Página de Amigos --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #333;
+    flex-shrink: 0;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--cor-texto-primario);
+}
+
+.back-link {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.friends-feed {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Espaço entre as seções */
+}
+
+.friends-section {
+    background-color: var(--cor-superficie);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #333;
+}
+
+.friends-section h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--cor-texto-primario);
+    border-bottom: 1px solid #444;
+    padding-bottom: 1rem;
+}
+
+.user-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* --- ESTILOS ATUALIZADOS PARA OS ITENS DE USUÁRIO --- */
+
+.user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Alinha o conteúdo e o botão 'X' nas extremidades */
+    padding: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.05); /* Um fundo sutil */
+    border-radius: 8px;
+    border: 1px solid #444;
+    transition: background-color 0.2s ease;
+}
+
+.user-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Espaço entre a foto e o texto */
+}
+
+.user-info .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Deixa a foto redonda */
+    object-fit: cover; /* Garante que a imagem não fique distorcida */
+    border: 2px solid #555;
+}
+
+.user-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--cor-texto-primario);
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+}
+
+.delete-friend-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 2rem; /* Tamanho do 'X' */
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 1rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.delete-friend-btn:hover {
+    color: var(--cor-erro); /* Vermelho ao passar o mouse */
+}
+
+/* --- FIM DOS ESTILOS ATUALIZADOS --- */
+
+.brand-footer {
+    text-align: right;
+    margin-top: auto; /* Empurra o rodapé para o final do contêiner */
+    padding-top: 1rem;
+    color: var(--cor-texto-secundario);
+    flex-shrink: 0;
+}
+/* Adicione esta classe ao seu friends.css */
+
+.user-profile-link {
+    text-decoration: none; /* Remove o sublinhado do link */
+    color: inherit; /* Faz o link herdar a cor do texto do elemento pai */
+    display: flex;
+    flex-grow: 1; /* Faz o link ocupar o espaço disponível */
+}
+
+/* --- CÓDIGO ADICIONADO PARA OCULTAR A BARRA DE ROLAGEM --- */
+.friends-feed {
+    /* Para Firefox */
+    scrollbar-width: none;
+}
+
+.friends-feed::-webkit-scrollbar {
+    /* Para Chrome, Safari e outros navegadores baseados em WebKit */
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .friends-feed {
+        padding: 1rem;
+        padding-bottom: 80px; /* Adiciona espaço na parte inferior para não sobrepor a nav */
+    }
+
+    .friends-section {
+        padding: 1rem;
+    }
+}

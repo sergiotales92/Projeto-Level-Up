@@ -1,0 +1,618 @@
+/* Garante que o layout ocupe a tela toda */
+body, html {
+    overflow: hidden;
+    height: 100%;
+    background-color: var(--cor-fundo);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- ESTILO ATUALIZADO DO MENU LATERAL --- */
+
+/* Estilos da Barra Lateral Esquerda (Sidebar) */
+.sidebar {
+    background-color: var(--cor-superficie);
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column; /* Organiza os itens em coluna */
+    justify-content: space-between; /* Empurra os grupos para topo, meio e baixo */
+    align-items: center; /* Centraliza os navs horizontalmente */
+    width: 70px; /* Largura fixa e estreita */
+    border-right: 1px solid #333;
+    z-index: 100;
+}
+
+.sidebar nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre os ícones */
+}
+
+.sidebar nav a {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    display: flex;
+    justify-content: center; /* Centraliza o ícone horizontalmente */
+    align-items: center;     /* Centraliza o ícone verticalmente */
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; /* Deixa o fundo do ícone redondo */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    position: relative; /* Adicionado para posicionar o ponto de notificação */
+}
+
+.sidebar nav a:hover {
+    background-color: rgba(159, 0, 255, 0.2);
+    color: var(--cor-texto-primario);
+}
+
+.sidebar nav a i {
+    font-size: 1.3rem;
+}
+
+/* NOVO: Estilo para o ponto de notificação do chat */
+.notification-dot {
+  display: none; /* Escondido por padrão */
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--cor-erro);
+  border-radius: 50%;
+  border: 1.5px solid var(--cor-superficie);
+}
+
+/* --- FIM DO ESTILO ATUALIZADO --- */
+
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #333;
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: var(--cor-superficie);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    max-width: 600px;
+}
+
+.search-bar i {
+    margin-right: 10px;
+    color: var(--cor-texto-secundario);
+}
+
+.search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--cor-texto-primario);
+    width: 100%;
+    font-family: var(--fonte-principal);
+    font-size: 0.8rem;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--cor-texto-primario);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    position: relative; /* Adicionado para posicionar o badge */
+}
+.menu-toggle:hover {
+    background-color: var(--cor-superficie);
+}
+
+/* Estilo para o balão de notificação */
+.notification-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--cor-erro);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 1px solid var(--cor-fundo);
+}
+
+.feed {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.posts-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    color: white;
+    font-size: 2rem;
+    border-radius: 10px;
+}
+
+.brand-footer {
+    text-align: right;
+    margin-top: 1rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* Estilos gerais para os dropdowns */
+.settings-menu, .notifications-menu {
+    position: relative;
+}
+
+.settings-dropdown, .notifications-dropdown {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: var(--cor-superficie);
+    border: 1px solid #444;
+    border-radius: 8px;
+    width: 280px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+    overflow: hidden;
+}
+
+.settings-dropdown.active, .notifications-dropdown.active {
+    display: block;
+}
+
+/* Dropdown de Configurações */
+.settings-dropdown a, .settings-dropdown button {
+    color: var(--cor-texto-primario);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--fonte-principal);
+}
+
+.settings-dropdown a:hover, .settings-dropdown button:hover {
+    background-color: rgba(159, 0, 255, 0.2);
+}
+
+.settings-dropdown i {
+    width: 25px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #444;
+    margin: 0.5rem 0;
+}
+
+/* Dropdown de Notificações */
+.dropdown-header {
+    padding: 1rem;
+    border-bottom: 1px solid #444;
+}
+.dropdown-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+.notifications-list {
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease-in-out; /* NOVA TRANSIÇÃO SUAVE */
+}
+
+/* NOVO ESTILO: Classe para expandir a lista */
+.notifications-list.expanded {
+    max-height: 60vh; /* Aumenta a altura máxima para 60% da altura da tela */
+}
+
+.empty-notification {
+    padding: 1rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    font-size: 0.8rem;
+}
+.dropdown-footer {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+    border-top: 1px solid #444;
+    text-decoration: none;
+    color: var(--cor-secundaria);
+    font-size: 0.8rem;
+    /* Estilos de botão */
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: var(--fonte-principal);
+}
+.dropdown-footer:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+}
+
+/* --- NOVOS ESTILOS PARA CENTRALIZAR ÍCONES (ADICIONADOS) --- */
+
+/* Grupos da sidebar */
+.sidebar-top,
+.sidebar-main,
+.sidebar-bottom {
+    width: 100%;
+}
+
+.sidebar-bottom {
+    min-height: 50px;
+}
+
+/* Estilo para cada item na lista de notificações */
+.notification-item {
+    display: block; 
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #444;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: var(--cor-texto-primario);
+    text-decoration: none;
+}
+
+.notifications-list a:last-child .notification-item,
+.notifications-list .notification-item:last-child {
+     border-bottom: none;
+}
+
+
+.notification-item:hover {
+    background-color: rgba(159, 0, 255, 0.1);
+}
+
+.notification-item p {
+    margin: 0 0 4px 0;
+    line-height: 1.4;
+}
+
+.notification-item small {
+    color: var(--cor-texto-secundario);
+}
+
+.home-content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.feed-column {
+    flex: 2; /* takes 2/3 of the space */
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+}
+
+.comunidade-column {
+    flex: 1; /* takes 1/3 of the space */
+    display: flex;
+    flex-direction: column;
+    background-color: #1f1f1f;
+}
+
+.comunidade-feed {
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comunidade-feed h2 {
+    font-family: var(--fonte-principal);
+    font-size: 1.2rem;
+    color: var(--cor-primaria);
+    margin-bottom: 0;
+}
+
+#games-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.game-card {
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--cor-texto-primario);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--cor-primaria);
+    border-color: var(--cor-primaria);
+}
+
+.game-card-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.game-card-info h3 {
+    margin: 0;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+}
+
+#expanded-game-posts .post-card {
+    border-bottom: 1px solid #444;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* --- CÓDIGO ADICIONADO PARA OCULTAR A BARRA DE ROLAGEM --- */
+.feed, .comunidade-feed {
+    /* Para Firefox */
+    scrollbar-width: none;
+}
+
+.feed::-webkit-scrollbar, .comunidade-feed::-webkit-scrollbar {
+    /* Para Chrome, Safari e outros navegadores baseados em WebKit */
+    display: none;
+}
+
+/* --- ESTILOS PARA OS RESULTADOS DA PESQUISA --- */
+.search-results-section {
+    padding-top: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.search-results-section:last-of-type {
+    border-bottom: none;
+}
+
+.search-results-section h3 {
+    font-size: 0.8rem;
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto-secundario);
+    padding: 0 1.5rem 1rem 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.user-result-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+}
+
+.user-result-card:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user-result-card img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-result-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-result-info .nickname {
+    font-weight: bold;
+    color: var(--cor-texto-primario);
+}
+
+.user-result-info .bio {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Oculta os novos elementos do cabeçalho no desktop por padrão */
+.header-logo-mobile,
+.mobile-header-btn {
+    display: none;
+}
+
+/* --- Estilos da Barra de Navegação Mobile --- */
+.mobile-nav {
+    display: none; /* Escondido no desktop */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: var(--cor-superficie);
+    border-top: 1px solid #333;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+}
+
+.mobile-nav-link {
+    color: var(--cor-texto-secundario);
+    font-size: 1.5rem;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+    color: var(--cor-texto-primario);
+}
+
+.mobile-nav-link.active {
+    color: var(--cor-primaria);
+}
+
+/* Ajusta o ponto de notificação para a nav mobile */
+.mobile-nav-link .notification-dot {
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+
+/* --- Media Query para Layout Mobile --- */
+@media (max-width: 768px) {
+    /* Esconde a sidebar de desktop */
+    .sidebar.left-sidebar {
+        display: none !important;
+    }
+
+    /* Mostra a navegação mobile */
+    .mobile-nav {
+        display: flex !important;
+    }
+
+    /* Ajusta o header principal para o novo layout */
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+    }
+
+    .header-logo-mobile {
+        display: block !important;
+        font-family: var(--fonte-principal);
+        font-size: 1.2rem;
+        color: var(--cor-primaria);
+    }
+
+    .search-bar {
+        display: none !important; /* Esconde a barra de busca */
+    }
+
+    .header-icons {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem; /* Espaçamento entre os ícones */
+    }
+
+    .mobile-header-btn {
+        display: flex !important;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        background: none;
+        border: none;
+        color: var(--cor-texto-primario);
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    .mobile-header-btn:hover {
+        background-color: var(--cor-superficie);
+    }
+
+    .notifications-menu {
+        display: block !important; /* Garante que o menu de notificações esteja visível */
+    }
+
+    .settings-menu {
+        margin-right: 1rem; /* Adiciona um respiro na lateral */
+    }
+
+    /* Ajusta o layout do conteúdo */
+    .home-content-wrapper {
+        flex-direction: column;
+        overflow-y: auto; /* Permite a rolagem da coluna de feed */
+        height: 100%;
+    }
+    
+    .feed-column {
+        border-right: none;
+        flex: 1;
+    }
+
+    .feed {
+        padding: 1rem;
+        padding-bottom: 70px; /* Adiciona espaço na parte inferior para não sobrepor a nav */
+    }
+
+    .comunidade-column {
+        display: none !important; /* Oculta a coluna da comunidade na home, será acessada via nav */
+    }
+
+    .fab {
+        bottom: 80px; /* 60px (nav) + 20px (margin) */
+        right: 20px;
+    }
+}
+
+/* --- CORREÇÃO: Remove o botão de post "+" do cabeçalho --- */
+#open-post-modal {
+    display: none !important;
+}

@@ -1,0 +1,554 @@
+/* Usamos as variáveis de cor globais do seu style.css */
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: Arial, sans-serif; /* Usamos uma fonte mais legível para formulários */
+    overflow-y: auto; /* Permite scroll na página de perfil */
+}
+
+/* Um "header" simples apenas para esta página */
+.profile-edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--cor-superficie);
+    border-bottom: 1px solid #333;
+}
+
+.profile-edit-header h1 {
+    font-family: var(--fonte-principal);
+    font-size: 1.2rem;
+    color: var(--cor-primaria);
+}
+
+.profile-edit-header .back-link {
+    font-family: var(--fonte-principal);
+    font-size: 0.8rem;
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.profile-edit-header .back-link:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+}
+
+/* Container principal que centraliza o conteúdo */
+.profile-page-wrapper {
+    max-width: 900px;
+    margin: 2rem auto; /* Centraliza o formulário na página */
+    padding: 2rem;
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+}
+
+#profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Aumenta o espaço entre as seções do formulário */
+}
+
+/* * NOVO ESTILO: Ajusta o layout da seção superior quando 
+ * o formulário está em modo de visualização ('view-only').
+ * Isso faz a foto, nickname e bio ficarem centralizados.
+ */
+#profile-form.view-only .profile-header-edit {
+    flex-direction: column; /* Coloca os itens em coluna */
+    align-items: center;    /* Centraliza os itens */
+    gap: 0.5rem;            /* Diminui o espaço entre a foto e o novo texto */
+}
+
+
+/* --- Seção Superior: Avatar + Inputs de Texto --- */
+
+/* Alinha o avatar e os detalhes lado a lado */
+.profile-header-edit {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* Container do Avatar (Foto) */
+.profile-avatar-edit {
+    flex-basis: 150px; /* Largura fixa */
+    flex-shrink: 0;
+    text-align: center;
+}
+/* NOVO ESTILO: Remove a largura fixa para flex-direction: column */
+#profile-form.view-only .profile-avatar-edit {
+    flex-basis: auto; 
+}
+
+
+#profile-image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* A CHAVE para o visual de rede social! */
+    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    border: 3px solid var(--cor-primaria);
+    margin-bottom: 1rem;
+    background-color: #333;
+    transition: opacity 0.3s ease; /* Adiciona transição para o loading */
+}
+
+/* NOVO: Feedback visual de loading */
+#profile-image-preview.loading {
+    opacity: 0.5;
+}
+
+/* Esconde o input de ficheiro padrão */
+#profile-image-input {
+    display: none;
+}
+
+/* NOVO: Estiliza o 'label' para parecer um botão */
+.upload-image-label {
+    font-family: var(--fonte-principal);
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
+    background-color: transparent;
+    color: var(--cor-secundaria);
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: inline-block; /* Faz o 'label' respeitar o padding */
+}
+
+.upload-image-label:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+}
+
+/* Container dos Inputs de Texto (Nickname, Bio) */
+.profile-details-edit {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-details-edit label {
+    font-family: var(--fonte-principal);
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: -0.5rem; /* Aproxima o label do input */
+}
+
+.profile-details-edit input[type="text"],
+.profile-details-edit textarea {
+    background-color: var(--cor-fundo);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 0.8rem;
+    color: var(--cor-texto-primario);
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.profile-details-edit input[type="text"]:focus,
+.profile-details-edit textarea:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 8px var(--cor-primaria);
+}
+
+.profile-details-edit textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* --- Seção de Conteúdo: Plataformas e Jogos --- */
+
+.profile-content-edit {
+    border-top: 1px solid #333;
+    padding-top: 2rem;
+}
+
+/* Títulos das seções */
+.profile-content-edit > label {
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    color: var(--cor-primaria);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* Grid para os checkboxes */
+.checkbox-group,
+#games-checkboxes {
+    display: grid;
+    /* Cria colunas responsivas: preenche com o máximo de colunas de 200px que couberem */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+/* Estilo de cada item do checkbox */
+.checkbox-group div,
+#games-checkboxes div {
+    display: flex;
+    align-items: center;
+    background-color: var(--cor-fundo);
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #333;
+    transition: border-color 0.2s;
+}
+
+.checkbox-group div:hover,
+#games-checkboxes div:hover {
+    border-color: var(--cor-secundaria);
+}
+
+.checkbox-group input,
+#games-checkboxes input {
+    margin-right: 10px;
+    /* Estiliza o checkbox */
+    transform: scale(1.2);
+    accent-color: var(--cor-primaria);
+}
+
+.checkbox-group label,
+#games-checkboxes label {
+    font-size: 0.8rem;
+}
+
+/* Divisor entre Plataformas e Jogos */
+.menu-container {
+    margin-top: 2.5rem;
+}
+
+/* Botão Salvar */
+#profile-form button[type="submit"] {
+    font-family: Arial, sans-serif; /* Fonte mais legível para botões */
+    font-size: 1rem;
+    font-weight: bold; /* Deixa o texto mais forte */
+    padding: 1rem;
+    background: linear-gradient(45deg, var(--cor-primaria), #b300ff); /* Gradiente roxo */
+    color: var(--cor-texto-primario);
+    border: none;
+    border-radius: 8px; /* Cantos mais arredondados */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transição para todos os efeitos */
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 20px rgba(159, 0, 255, 0.6); /* Sombra mais elaborada */
+    align-self: center; /* Centraliza o botão */
+    width: 50%; /* Largura de 50% do container */
+    max-width: 300px; /* Largura máxima */
+    margin-top: 1rem; /* Espaço acima do botão */
+}
+
+#profile-form button[type="submit"]:hover {
+    transform: translateY(-3px); /* Efeito de levantar ao passar o mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(159, 0, 255, 0.8);
+}
+
+
+/* --- SEÇÃO DO ÍCONE DE MENSAGEM --- */
+
+#message-icon-container {
+    position: absolute; /* Posição absoluta em relação ao #profile-form */
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+#send-message-btn {
+    background: none;
+    border: none;
+    color: var(--cor-secundaria);
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+#send-message-btn:hover {
+    color: var(--cor-primaria);
+}
+
+
+/* Estilo que é ativado apenas no modo de visualização de amigo */
+#profile-form.view-only .profile-header-edit {
+    align-items: center; /* Centraliza verticalmente o avatar e o texto */
+}
+
+
+/* --- NOVO: Container para as infos de amigo (nome e bio) --- */
+
+.profile-view-container {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* NOVO: Estilo para o Nickname no modo de visualização (MAIOR) */
+.profile-view-container .friend-nickname {
+    font-size: 2.2rem;
+    font-family: var(--fonte-principal);
+    color: var(--cor-primaria);
+    margin: 0;
+}
+
+/* NOVO: Estilo para a Bio no modo de visualização (MAIOR) */
+.profile-view-container .friend-bio {
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+    margin-top: 0.5rem;
+    max-width: 100%;
+}
+
+
+/* --- Oculta os inputs e botões de edição de volta para o perfil de visualização --- */
+
+/* Esconde o container de edição de nickname/bio que foi substituído */
+#profile-form.view-only #profile-details-edit {
+    display: none !important;
+}
+
+/* --- ESTILOS PARA O MODAL DE SELEÇÃO DE AVATAR --- */
+
+/* Torna a área do avatar clicável */
+.profile-avatar-edit {
+    cursor: pointer;
+}
+
+/* A sobreposição escura que cobre a tela inteira */
+.avatar-modal-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* O conteúdo da janela do modal */
+.avatar-modal-content {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-primaria);
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 25px var(--cor-primaria);
+}
+
+/* O cabeçalho do modal */
+.avatar-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.avatar-modal-header h2 {
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto-primario);
+    font-size: 1.2rem;
+}
+
+/* O botão de fechar (X) */
+.close-avatar-modal-btn {
+    font-size: 2.5rem;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-avatar-modal-btn:hover {
+    color: var(--cor-texto-primario);
+}
+
+/* A grade que exibirá os avatares */
+.avatar-selection-grid {
+    overflow-y: auto;
+    display: grid;
+    /* Cria colunas responsivas, cada uma com no mínimo 100px */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    padding-right: 10px; /* Espaço para a barra de rolagem */
+}
+
+/* Estilo de cada imagem de avatar na grade */
+.avatar-selection-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Mantém a imagem quadrada */
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.avatar-selection-grid img:hover {
+    border-color: var(--cor-secundaria);
+    transform: scale(1.05);
+}
+
+/* --- ESTILO DA BARRA DE ROLAGEM DENTRO DO MODAL --- */
+.avatar-selection-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.avatar-selection-grid::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+
+.avatar-selection-grid::-webkit-scrollbar-thumb {
+    background-color: var(--cor-primaria);
+    border-radius: 4px;
+}
+
+.avatar-selection-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #b300ff;
+}
+
+/* --- ESTILOS PARA AS ESTATÍSTICAS DO PERFIL (SEGUIDORES/SEGUINDO) --- */
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    cursor: pointer; /* Adiciona o cursor de ponteiro para indicar que é clicável */
+    transition: opacity 0.2s;
+}
+
+.stat:hover {
+    opacity: 0.8;
+}
+
+.stat-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--cor-texto-primario);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    font-family: Arial, sans-serif;
+}
+
+
+/* --- NOVOS ESTILOS PARA O MODAL DE LISTA DE SEGUIDORES/SEGUINDO --- */
+
+.follow-list-container {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10px; /* Espaço para a barra de rolagem */
+}
+
+.follow-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+}
+
+.follow-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.follow-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.follow-user-info img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.follow-user-info span {
+    font-weight: bold;
+}
+
+/* Scrollbar customizada para a lista */
+.follow-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+.follow-list-container::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+.follow-list-container::-webkit-scrollbar-thumb {
+    background-color: var(--cor-primaria);
+    border-radius: 4px;
+}
+.follow-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: #b300ff;
+}
+
+@media (max-width: 768px) {
+    .profile-page-wrapper {
+        max-width: none;
+        margin: 0;
+        padding: 1rem;
+        padding-bottom: 80px; /* Espaço para a nav mobile */
+        border-radius: 0;
+        border: none;
+    }
+
+    .profile-header-edit {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .profile-avatar-edit {
+        flex-basis: auto;
+    }
+
+    #profile-image-preview {
+        width: 120px;
+        height: 120px;
+    }
+
+    .checkbox-group,
+    #games-checkboxes {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    #profile-form button[type="submit"] {
+        align-self: center; /* Centraliza o botão de salvar */
+        width: 100%;
+        max-width: 300px;
+    }
+}

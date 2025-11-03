@@ -1,0 +1,35 @@
+/* Garante que o conteúdo possa rolar sobre o fundo fixo */
+body {
+    overflow-y: auto;
+}
+
+/* Estilos para o vídeo de fundo */
+#background-video {
+    position: fixed; /* Mantém o vídeo fixo na tela */
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2; /* Coloca o vídeo bem no fundo */
+    object-fit: cover; /* Garante que o vídeo cubra toda a área sem distorção */
+}
+
+/* Sobreposição escura para melhorar a legibilidade do texto */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 10, 0.7); /* Cor de fundo escura com 70% de opacidade */
+    z-index: -1; /* Posiciona a sobreposição entre o vídeo e o conteúdo */
+}
+
+/* Garante que o conteúdo principal fique sobre o vídeo e a sobreposição */
+.profile-edit-header, .profile-page-wrapper, .landing-footer {
+    position: relative;
+    z-index: 1;
+}

@@ -1,0 +1,473 @@
+/* Adiciona a importação da nova fonte no início do arquivo */
+@import url('https://fonts.cdnfonts.com/css/pixel-lcd7');
+@import url('toast.css');
+
+
+:root {
+    /* Altera a fonte principal para Pixel LCD7 */
+    --fonte-primaria: #9f00ff; /* Roxo neon */
+    --cor-secundaria: #00f0ff; /* Ciano neon */
+    --cor-fundo: #0a0a0a; /* Preto quase total */
+    --cor-superficie: #1a1a1a;
+    --cor-texto-primario: #ffffff;
+    --cor-texto-secundario: #b3b3b3;
+    --cor-erro: #ff3366; /* Rosa neon para erros */
+    --fonte-principal: 'Pixel LCD7', sans-serif; /* FONTE ALTERADA */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto-primario);
+    background-color: var(--cor-fundo);
+    overflow: hidden;
+}
+
+#landing-page {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+#landing-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+.landing-header, .landing-main, .landing-footer {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem 2.5rem;
+    text-shadow: 0 0 5px var(--cor-secundaria), 0 0 10px var(--cor-primaria);
+}
+
+.logo {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.landing-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Alinha o conteúdo para o final */
+    align-items: center;
+    text-align: center;
+    padding-bottom: calc(20% - 100px); /* Desce mais o conteúdo */
+}
+
+.intro-text {
+    max-width: 700px;
+}
+
+#typewriter {
+    font-size: 1.2rem; /* Tamanho ajustado para a fonte */
+    line-height: 1.5;
+    margin-bottom: 8rem;
+    min-height: 50px; 
+    text-shadow: 0 0 8px var(--cor-secundaria);
+}
+
+#typewriter::after {
+    content: '_';
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { color: transparent }
+    50% { color: var(--cor-secundaria); }
+}
+
+#start-button {
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--cor-texto-primario);
+    border: 2px solid var(--cor-primaria);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--cor-primaria);
+}
+
+#start-button:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-primario);
+    box-shadow: 0 0 25px var(--cor-primaria), 0 0 10px var(--cor-secundaria);
+}
+
+.landing-footer {
+    padding: 1rem;
+    font-size: 0.7rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+/* Botão de Suporte Flutuante */
+.floating-support-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-fundo);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 15px var(--cor-secundaria);
+    z-index: 100;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-support-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--cor-secundaria);
+}
+
+/* Estilos para a página de autenticação (mantidos para auth.html) */
+body#auth-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+#app-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+/* Style for the password wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 2.5rem; /* Make space for the icon */
+}
+
+/* Style for the toggle password icon */
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--cor-texto-secundario);
+    font-size: 1.2rem;
+}
+
+/* Style for the forgot password link */
+.forgot-password {
+    text-align: right; /* Align to the right */
+    font-size: 0.8rem;
+    margin-top: -0.5rem; /* Adjust spacing */
+}
+
+.forgot-password a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--cor-primaria);
+    font-size: 1.2rem;
+}
+
+.error-message {
+    color: var(--cor-erro);
+    font-size: 0.8rem;
+    text-align: center;
+    min-height: 1.2em;
+    text-shadow: none;
+}
+
+form p {
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    font-size: 0.8rem;
+    text-shadow: none;
+}
+
+form a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-button {
+    color: var(--cor-texto-secundario);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--cor-texto-primario);
+    text-decoration: none;
+    outline: none;
+}
+
+/* Form Transitions */
+#login-form,
+#signup-form {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    display: none;
+}
+
+/* Button Loading Spinner */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--cor-primaria);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Estilos Adicionais para a Página de Autenticação (auth.html) --- */
+
+.auth-wrapper {
+    justify-content: center !important; /* Centraliza o conteúdo principal */
+    align-items: center !important;
+    padding-bottom: 0 !important; /* Remove o padding que empurrava o texto para baixo */
+}
+
+#auth-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: rgba(10, 10, 10, 0.5); /* Fundo semi-transparente */
+    padding: 2.5rem;
+    border: 2px solid var(--cor-primaria);
+    border-radius: 8px;
+    box-shadow: 0 0 15px var(--cor-primaria), 0 0 5px var(--cor-secundaria) inset;
+    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+    text-align: center;
+}
+
+#auth-container h2 {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: var(--cor-texto-primario);
+    text-shadow: 0 0 8px var(--cor-secundaria);
+}
+
+#auth-container form {
+    gap: 1.5rem;
+}
+
+#auth-container input[type="email"],
+#auth-container input[type="password"],
+#auth-container input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--cor-secundaria);
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 0;
+    width: 100%;
+    color: var(--cor-texto-primario);
+    font-family: var(--fonte-principal);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#auth-container input[type="email"]:focus,
+#auth-container input[type="password"]:focus,
+#auth-container input[type="text"]:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 10px var(--cor-primaria);
+}
+
+#auth-container button {
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--cor-texto-primario);
+    border: 2px solid var(--cor-primaria);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--cor-primaria);
+}
+
+#auth-container button:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-primario);
+    box-shadow: 0 0 25px var(--cor-primaria), 0 0 10px var(--cor-secundaria);
+}
+
+#auth-container p {
+    font-size: 0.7rem;
+}
+
+#auth-container .password-wrapper .toggle-password {
+    top: 55%; /* Ajuste fino da posição do ícone */
+}
+
+/* Ajustes no Modal para combinar com o estilo */
+.modal-content {
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--cor-secundaria);
+    box-shadow: 0 0 20px var(--cor-secundaria);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* --- CÓDIGO ADICIONADO PARA OCULTAR A BARRA DE ROLAGEM GLOBAL --- */
+body, html {
+    /* Para Firefox */
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar, html::-webkit-scrollbar {
+    /* Para Chrome, Safari e outros navegadores baseados em WebKit */
+    display: none;
+}
+
+/* --- Estilos Responsivos para Mobile --- */
+
+@media (max-width: 768px) {
+    .landing-header, .landing-footer {
+        padding: 1rem 1.5rem; /* Reduz o padding no mobile */
+    }
+
+    .landing-main {
+        padding: 1rem; /* Ajusta o padding principal */
+    }
+
+    #auth-container {
+        width: 90%;
+        max-width: none; /* Remove a largura máxima fixa */
+        padding: 2rem; /* Reduz o padding interno */
+        border: 1px solid var(--cor-primaria); /* Borda mais sutil */
+        box-shadow: none; /* Remove a sombra para uma aparência mais limpa */
+        background-color: rgba(10, 10, 10, 0.7); /* Fundo um pouco mais opaco */
+    }
+
+    #auth-container h2 {
+        font-size: 1.1rem; /* Ajusta o tamanho do título */
+        margin-bottom: 1.5rem;
+    }
+
+    #auth-container input[type="email"],
+    #auth-container input[type="password"],
+    #auth-container input[type="text"] {
+        font-size: 1rem; /* Aumenta a fonte dos inputs para legibilidade */
+    }
+
+    #auth-container button {
+        padding: 0.9rem 1.5rem; /* Ajusta o padding do botão */
+        font-size: 0.9rem;
+    }
+
+    #auth-container p {
+        font-size: 0.8rem; /* Garante que o texto de ajuda seja legível */
+    }
+
+    .floating-support-button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #auth-container {
+        padding: 1.5rem; /* Padding ainda menor para telas muito pequenas */
+    }
+
+    #auth-container h2 {
+        font-size: 1rem;
+    }
+
+    #auth-container form {
+        gap: 1.2rem; /* Reduz o espaçamento entre os campos */
+    }
+}

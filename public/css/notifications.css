@@ -1,0 +1,107 @@
+/* css/notifications.css */
+
+/* Container principal da lista de notificações */
+.notifications-container {
+    padding: 20px;
+    height: calc(100vh - 70px); /* Altura total menos o header */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#requests-list {
+    flex-grow: 1;
+}
+
+/* Estilo para cada card de notificação (gerado pelo JS) */
+.player-card {
+    background-color: #1e1e1e;
+    border: 1px solid #282828;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+}
+
+.player-card:hover {
+    background-color: #252525;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre a foto e o texto */
+}
+
+.user-info .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Garante que a imagem não fique distorcida */
+    border: 2px solid #333;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.user-info p strong {
+    color: #fff;
+}
+
+.request-actions button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    margin-left: 10px;
+    transition: opacity 0.3s;
+}
+
+.request-actions button:hover {
+    opacity: 0.8;
+}
+
+.request-actions .accept-btn {
+    background-color: #4CAF50; /* Verde */
+}
+
+.request-actions .reject-btn {
+    background-color: #f44336; /* Vermelho */
+}
+
+/* Estilo para o botão de voltar no cabeçalho */
+.back-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #444;
+}
+
+.back-button i {
+    margin-right: 8px;
+}
+
+/* --- CÓDIGO ADICIONADO PARA OCULTAR A BARRA DE ROLAGEM --- */
+.notifications-container {
+    /* Para Firefox */
+    scrollbar-width: none;
+}
+
+.notifications-container::-webkit-scrollbar {
+    /* Para Chrome, Safari e outros navegadores baseados em WebKit */
+    display: none;
+}

@@ -1,0 +1,96 @@
+/* public/css/comunidade.css */
+
+.comunidade-feed {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#games-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    flex-grow: 1;
+}
+
+.game-card {
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--cor-texto-primario);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--cor-primaria);
+    border-color: var(--cor-primaria);
+}
+
+.game-card-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.game-card-info {
+    min-width: 0;
+}
+
+.game-card-info h3 {
+    margin: 0;
+    font-family: var(--fonte-principal);
+    font-size: 1.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+/* --- ESTILOS PARA A PÁGINA game-posts.html E comunidade.html --- */
+#game-specific-header,
+.main-header {
+    justify-content: space-between;
+}
+
+.back-link-styled {
+    font-family: var(--fonte-principal);
+    font-size: 0.8rem;
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 20px;
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap; /* Impede que o texto do botão quebre */
+}
+
+.back-link-styled:hover {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-fundo);
+}
+
+
+/* Scrollbar */
+.comunidade-feed {
+    scrollbar-width: none;
+}
+
+.comunidade-feed::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .comunidade-feed {
+        padding-bottom: 70px; /* Adiciona espaço na parte inferior para não sobrepor a nav */
+    }
+}

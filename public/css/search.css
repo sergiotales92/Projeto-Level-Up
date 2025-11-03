@@ -1,0 +1,74 @@
+/* public/css/search.css */
+
+#search-results {
+    display: grid;
+    /* Cria colunas responsivas: no mínimo 200px de largura, preenchendo o espaço */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.player-card {
+    background-color: var(--cor-superficie);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-color: var(--cor-primaria);
+}
+
+.player-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%; /* Garante que o link ocupe o espaço */
+}
+
+.player-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cor-primaria);
+}
+
+.player-nickname {
+    font-weight: bold;
+    color: var(--cor-texto-primario);
+    font-size: 1rem;
+    
+    /* Trunca o texto se for muito longo */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estiliza o botão dentro do card */
+.player-card .upload-image-label {
+    width: 100%;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.8rem;
+    box-sizing: border-box; 
+}
+
+/* Estilo para botões desativados */
+.player-card .upload-image-label:disabled {
+    background-color: #333;
+    border-color: #444;
+    color: var(--cor-texto-secundario);
+    cursor: not-allowed;
+}

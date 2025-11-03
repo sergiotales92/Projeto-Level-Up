@@ -1,0 +1,524 @@
+/* public/css/direct.css */
+
+/* --- CÓDIGO NOVO E ATUALIZADO --- */
+
+/* Esconde a lista de conversas quando um chat está ativo */
+.direct-container.chat-active .conversations-list {
+    display: none;
+}
+
+/* Faz a área de chat ocupar toda a largura quando um chat está ativo */
+.direct-container.chat-active .chat-area {
+    width: 100%;
+}
+
+.unread-counter {
+    background-color: var(--cor-primaria);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+}
+
+
+/* --- CONFIGURAÇÕES DE LAYOUT GERAL --- */
+.direct-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden; /* Mantém o overflow hidden para desktop */
+    border-top: 1px solid #333;
+    height: calc(100vh - 65px); /* Ocupa a altura restante da tela (altura total - header) */
+}
+
+/* Estilo para o header principal da página */
+.main-header {
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 65px;
+    box-sizing: border-box;
+}
+
+.main-header h1 {
+    font-size: 1.2rem;
+    font-family: var(--fonte-principal);
+    margin: 0;
+    color: var(--cor-texto-primario);
+}
+
+
+/* --- ESTILO DA LISTA DE CONVERSAS (COLUNA ESQUERDA) --- */
+.conversations-list {
+    width: 350px;
+    border-right: 1px solid #333;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.conversation-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #222;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    position: relative;
+    cursor: pointer;
+}
+
+.conversation-item:hover {
+    background-color: rgba(159, 0, 255, 0.1);
+}
+
+.conversation-item.active {
+    background-color: #111;
+    border-left: 3px solid var(--cor-primaria);
+    padding-left: calc(1rem - 3px);
+}
+
+.avatar {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50%;
+    color: #FFFFFF !important;
+    background-color: #333;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.conversation-info {
+    flex-grow: 1;
+    overflow: hidden;
+    padding-right: 30px;
+}
+
+
+.conversation-info p {
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.conversation-info .name {
+    font-size: 0.9rem;
+    color: #FFFFFF !important;
+}
+
+.conversation-info .last-message {
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario) !important;
+}
+
+.conversation-item-placeholder {
+    padding: 1rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    font-size: 0.8rem;
+}
+
+
+/* --- ESTILO DA ÁREA DE CHAT (COLUNA DIREITA) --- */
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
+    transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
+    height: 100%;
+    overflow: hidden;
+    /* Garante que o chat-area NÃO tenha padding-bottom,
+       pois o input desktop faz parte dele e o mobile ficará por cima */
+    padding-bottom: 0;
+}
+
+.chat-header {
+    display: none; /* Começa escondido, mostra quando chat-active */
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #333;
+    flex-shrink: 0;
+}
+
+/* Mostra o header quando o chat está ativo */
+.direct-container.chat-active .chat-header {
+    display: flex;
+}
+
+
+.back-to-conversations {
+    display: none; /* Escondido por padrão (desktop), mostrado no mobile */
+    margin-right: 1.5rem;
+    color: var(--cor-texto-secundario);
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.5rem;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.back-to-conversations:hover {
+    color: var(--cor-primaria);
+}
+
+
+.chat-header .user-profile a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.chat-header .user-profile .name {
+    color: #FFFFFF !important;
+}
+
+.chat-body {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    padding: 1.5rem;
+    overflow-y: auto; /* Permite scroll vertical */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Adiciona padding-bottom aqui para compensar a falta no .chat-area (para desktop) */
+    /* E para dar espaço acima do input mobile fixo */
+    padding-bottom: 70px; /* Ajuste este valor se necessário */
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    max-width: 60%;
+    position: relative;
+}
+
+.message.received {
+    align-self: flex-start;
+}
+
+.message.received .message-content {
+    background-color: #000000;
+    border: 1px solid #333;
+    border-radius: 15px 15px 15px 5px;
+    color: #FFFFFF !important;
+}
+
+.message.sent {
+    align-self: flex-end;
+}
+
+.message.sent .message-content {
+    background-color: var(--cor-primaria);
+    border-radius: 15px 15px 5px 15px;
+    color: white;
+}
+
+.message-content {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.message-content p {
+    margin: 0;
+    color: inherit !important;
+}
+
+.message-content img, .message-content video {
+    max-width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin-top: 5px;
+}
+
+.message-time {
+    display: block;
+    text-align: right;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+    clear: both;
+}
+
+.message.received .message-time {
+    color: var(--cor-texto-secundario);
+}
+
+
+/* Estilos BASE para .chat-input-box (aplicados a ambos inicialmente) */
+.chat-input-box {
+    display: none; /* Começa escondido */
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #333;
+    background-color: #101010;
+    flex-shrink: 0;
+}
+
+.chat-input-box input[type="text"] {
+    flex-grow: 1;
+    background-color: var(--cor-superficie);
+    border: none;
+    border-radius: 20px;
+    padding: 0.8rem 1.5rem;
+    color: var(--cor-texto-primario);
+    font-family: var(--fonte-principal);
+    font-size: 0.9rem;
+    outline: none;
+    margin: 0 10px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: var(--cor-texto-secundario);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+.icon-button:hover {
+    color: var(--cor-primaria);
+}
+
+.send-button {
+    color: var(--cor-primaria);
+}
+
+/* Esconde o input mobile por padrão (Desktop) */
+#chat-input-box-mobile {
+    display: none;
+}
+
+/* Mostra o input desktop por padrão (Desktop) quando o chat está ativo */
+.direct-container.chat-active #chat-input-box-desktop {
+    display: flex; /* Mostra no desktop quando o chat está ativo */
+}
+
+
+.chat-placeholder {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    padding: 2rem;
+}
+
+.chat-placeholder h2 {
+    color: var(--cor-texto-primario);
+    font-family: var(--fonte-principal);
+    margin-bottom: 1rem;
+}
+
+
+/* Estilos da Barra Lateral Esquerda (Sidebar) - Mantidos iguais */
+.sidebar {
+    background-color: #000000;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70px;
+    border-right: 1px solid #333;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.sidebar nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar nav a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar nav a:hover {
+    background-color: rgba(159, 0, 255, 0.2);
+}
+
+.sidebar nav a i {
+    font-size: 1.3rem;
+    color: #999999;
+    transition: color 0.2s ease;
+}
+
+.sidebar nav a:hover i {
+    color: #FFFFFF;
+}
+
+.sidebar nav a.active i {
+    color: var(--cor-primaria);
+}
+
+
+/* --- CÓDIGO ADICIONADO PARA OCULTAR A BARRA DE ROLAGEM --- */
+.conversations-list, .chat-body {
+    scrollbar-width: none; /* Firefox */
+}
+
+.conversations-list::-webkit-scrollbar, .chat-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+/* --- MEDIA QUERY PARA MOBILE --- */
+@media (max-width: 768px) {
+    /* Esconde o input desktop no mobile */
+    #chat-input-box-desktop {
+        display: none !important; /* !important para garantir */
+    }
+
+    /* Mostra e posiciona o input mobile quando chat está ativo */
+    .direct-container.chat-active #chat-input-box-mobile {
+        display: flex; /* Mostra o input mobile */
+        position: fixed; /* Fixa na tela */
+        bottom: 60px; /* Posiciona acima da barra de navegação mobile */
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #101010; /* Mantém o fundo */
+        border-top: 1px solid #333; /* Mantém a borda */
+        padding: 0.8rem 1rem; /* Padding ajustado para mobile */
+        z-index: 100; /* Garante que fique acima do chat-body */
+        box-sizing: border-box;
+    }
+
+    .chat-body {
+        /* Garante espaço suficiente acima do input mobile fixo */
+        padding-bottom: 139px; /* Pode precisar ajustar um pouco mais */
+
+        /* --- ALTERAÇÕES AQUI --- */
+        flex-grow: 1;         /* Faz o chat-body ocupar o espaço vertical restante na .chat-area */
+        overflow-y: auto;     /* Habilita o scroll vertical APENAS quando necessário */
+        /* Opcional: Melhora a performance de scroll em alguns dispositivos */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ajusta a altura do container principal no mobile para NÃO incluir a altura do input fixo */
+    .direct-container {
+        position: relative;
+        /* >>>>>>>> ALTERAÇÃO AQUI: Linha removida <<<<<<<<<< */
+        /* overflow: hidden; */
+        /* A altura deve ser apenas o espaço entre header e nav, o input fica FORA desse cálculo */
+        height: calc(100vh - 65px - 60px); /* Certifique-se que 65px e 60px são as alturas corretas */
+    }
+
+     .chat-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; /* Ocupa a altura do .direct-container */
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        /* Remove padding-bottom que era para o input desktop */
+        padding-bottom: 0;
+    }
+
+    .conversations-list {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease-in-out;
+        border-right: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+    }
+
+    /* Estado ativo do chat no mobile */
+    .direct-container.chat-active .conversations-list {
+        transform: translateX(-100%); /* Move a lista para a esquerda, para fora da tela */
+    }
+
+    .direct-container.chat-active .chat-area {
+        transform: translateX(0); /* Move a área do chat para a posição visível */
+    }
+
+    /* Botão voltar no header do chat */
+    .chat-header .back-to-conversations {
+        display: block; /* Mostra o botão no mobile */
+        margin-right: 1rem;
+        color: var(--cor-texto-primario);
+        font-size: 1.2rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Ajuste no padding do header para telas menores */
+    .chat-header {
+        padding: 0.8rem 1rem;
+    }
+}
+
+/* Estilos para GIFS e Mídia adicionados no final */
+.message-gif,
+.message-media {
+  max-width: 100%;
+  max-height: 250px; /* Limita a altura da mídia */
+  display: block;
+  border-radius: 8px;
+  margin-top: 5px;
+  object-fit: cover; /* Faz a imagem cobrir a área mantendo proporção */
+}
+
+/* Remove margem superior se o GIF/Imagem for o único conteúdo */
+.message-content p > img.message-gif:only-child,
+.message-content p > img.message-media:only-child {
+    display: block;
+    margin-top: 0;
+}
+
+/* Remove margem superior se a imagem estiver diretamente dentro do content */
+.message-content > img.message-gif:only-child,
+.message-content > img.message-media:only-child {
+    margin-top: 0;
+}

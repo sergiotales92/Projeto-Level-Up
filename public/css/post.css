@@ -1,0 +1,525 @@
+/* public/css/post.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* --- Seção de Criação de Post (Modal) --- */
+.create-post-card {
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #333;
+    max-width: 550px;
+    width: 100%;
+}
+
+.create-post-card h3 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--cor-texto-primario);
+}
+
+.create-post-card textarea {
+    width: 100%;
+    background-color: var(--cor-fundo);
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 1rem;
+    color: var(--cor-texto-primario);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    resize: none;
+    min-height: 80px;
+    margin-bottom: 0.5rem; /* Margem ajustada */
+}
+
+/* NOVO: Estilos para o contador de caracteres */
+.char-counter {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.char-counter.error {
+    color: var(--cor-erro);
+    font-weight: bold;
+}
+
+.create-post-actions {
+    display: flex;
+    justify-content: flex-end; /* Alterado para alinhar o botão à direita */
+    align-items: center;
+}
+
+#post-button {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+#post-button:hover {
+    background-color: #b300ff;
+}
+
+/* --- ESTILO NOVO E ATUALIZADO DO FEED --- */
+#posts-feed {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    transition: background-color 0.2s;
+}
+.post-card:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.post-avatar-column {
+    flex-shrink: 0;
+}
+.post-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-main-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0; /* <<< ALTERAÇÃO: Permite que a coluna encolha */
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.post-author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.post-author-name {
+    font-weight: bold;
+    color: var(--cor-texto-primario);
+    text-decoration: none;
+}
+.post-author-name:hover {
+    text-decoration: underline;
+}
+.post-timestamp {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+.post-more-options {
+    position: relative;
+}
+
+.post-more-options .icon-btn {
+    background: none;
+    border: none;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+.post-more-options .icon-btn:hover {
+    background-color: rgba(159, 0, 255, 0.1);
+    color: var(--cor-primaria);
+}
+
+.post-options-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    width: 250px;
+    z-index: 100;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.post-options-dropdown button {
+    background: none;
+    border: none;
+    color: var(--cor-texto-primario);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+}
+.post-options-dropdown button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.post-options-dropdown button.danger {
+    color: var(--cor-erro);
+}
+.post-options-dropdown i {
+    width: 20px;
+    text-align: center;
+}
+
+.post-content p {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+    color: #e0e0e0;
+    overflow-wrap: break-word; /* <<< ALTERAÇÃO: Força quebra de palavras/URLs */
+    word-wrap: break-word; /* <<< ALTERAÇÃO: Fallback */
+    word-break: break-word; /* <<< ALTERAÇÃO: Garante a quebra */
+    max-width: 100%; /* <<< ALTERAÇÃO: Garante que não exceda o container */
+}
+
+/* Garante que os links dentro do post também quebrem */
+.post-content p a { /* <<< NOVA REGRA */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* *** MODIFICADO *** */
+.post-media-container {
+    margin-top: 1rem;
+    border-radius: 16px; /* Mantém a borda arredondada no container */
+    overflow: hidden;
+    border: 1px solid #333;
+    /* Remove max-height daqui para aplicar diretamente na imagem */
+    /* max-height: 450px; */
+    display: flex; /* Ajuda a centralizar a imagem se ela for menor */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background-color: #000; /* Fundo preto para áreas vazias se a imagem for menor */
+}
+
+/* *** MODIFICADO *** */
+/* Aplica limite de altura e ajuste à imagem principal do post */
+.post-content .post-image {
+    width: auto; /* Permite que a largura se ajuste à altura */
+    height: auto; /* Permite que a altura se ajuste à largura */
+    max-width: 100%; /* Não deixa a imagem ultrapassar o container */
+    max-height: 450px; /* *** NOVO LIMITE DE ALTURA MÁXIMA *** */
+    object-fit: contain; /* *** GARANTE QUE A IMAGEM APAREÇA INTEIRA *** */
+    display: block; /* Garante que a imagem se comporte como bloco */
+    margin: 0 auto; /* Centraliza a imagem se ela for mais estreita que o container */
+    /* Remove aspect-ratio para permitir que a altura seja limitada */
+    /* aspect-ratio: 1 / 1; */
+}
+
+.post-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* REMOVIDO: max-width: 425px; <<< ALTERAÇÃO */
+    margin-top: 0.5rem;
+    width: 100%; /* <<< ALTERAÇÃO: Ocupa a largura disponível */
+    flex-wrap: nowrap; /* <<< ALTERAÇÃO: Mantém botões na mesma linha */
+}
+.post-actions .share-action {
+    margin-left: auto; /* Empurra o ícone de compartilhar para a direita */
+}
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cor-texto-secundario);
+}
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+}
+.action-count {
+    font-size: 0.8rem;
+}
+
+.comment-action:hover .action-btn, .comment-action:hover .action-count { color: var(--cor-secundaria); }
+.comment-action .action-btn:hover { background-color: rgba(0, 240, 255, 0.1); }
+.retweet-action:hover .action-btn, .retweet-action:hover .action-count { color: #00ba7c; }
+.retweet-action .action-btn:hover { background-color: rgba(0, 186, 124, 0.1); }
+.like-action:hover .action-btn, .like-action:hover .action-count { color: var(--cor-erro); }
+.like-action .action-btn:hover { background-color: rgba(255, 51, 102, 0.1); }
+.share-action:hover .action-btn { color: var(--cor-secundaria); background-color: rgba(0, 240, 255, 0.1); }
+.action-btn.liked, .action-btn.liked + .action-count { color: var(--cor-erro); font-weight: bold; }
+.action-btn.reposted, .action-btn.reposted + .action-count {
+    color: #00ba7c;
+    font-weight: bold;
+}
+
+.comments-section { margin-top: 1.5rem; border-top: 1px solid #333; padding-top: 1.5rem; }
+.comment-input-area { display: flex; gap: 10px; margin-bottom: 1.5rem; }
+.comment-input-area input { flex-grow: 1; background-color: var(--cor-fundo); border: 1px solid #444; border-radius: 20px; padding: 0.7rem 1rem; color: var(--cor-texto-primario); }
+.comment-input-area button { background-color: var(--cor-secundaria); color: var(--cor-fundo); border: none; border-radius: 20px; padding: 0 1.2rem; cursor: pointer; font-weight: bold; }
+
+/* ===== ESTILOS CORRIGIDOS PARA RESPONSIVIDADE ===== */
+.comment {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+.comment-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0; /* Impede que o avatar encolha */
+}
+.comment-body {
+    background-color: #2a2a2a;
+    padding: 0.7rem 1rem;
+    border-radius: 15px;
+    position: relative;
+    min-width: 0; /* Permite que o elemento encolha e não expanda o layout */
+    flex-grow: 1;
+}
+.comment-author {
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--cor-texto-primario);
+}
+.comment-text {
+    font-size: 0.9rem;
+    color: #dcdcdc;
+    white-space: pre-wrap; /* Força a quebra de palavras longas e respeita as quebras de linha */
+    word-wrap: break-word;
+}
+/* ===== FIM DAS CORREÇÕES ===== */
+
+.fab { position: fixed; bottom: 80px; right: 30px; width: 60px; height: 60px; background-color: var(--cor-primaria); color: white; border: none; border-radius: 50%; font-size: 2.2rem; font-weight: bold; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); cursor: pointer; z-index: 1000; transition: transform 0.2s ease-in-out, background-color 0.2s; }
+.fab:hover { transform: scale(1.1); background-color: #b300ff; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+.modal-overlay .create-post-card { margin-bottom: 0; position: relative; }
+.close-modal-btn { position: absolute; top: 10px; right: 20px; font-size: 2.5rem; color: var(--cor-texto-secundario); cursor: pointer; line-height: 1; transition: color 0.2s; }
+.close-modal-btn:hover { color: var(--cor-texto-primario); }
+
+.block-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 3000; display: flex; justify-content: center; align-items: center; }
+.block-modal-content { background-color: #1a1a1a; border-radius: 16px; padding: 2rem; max-width: 320px; width: 90%; text-align: left; }
+.block-modal-content h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.block-modal-content p { font-family: 'Roboto', sans-serif; color: var(--cor-texto-secundario); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem; }
+.block-modal-actions { display: flex; flex-direction: column; gap: 1rem; }
+.block-modal-actions button { padding: 0.8rem; border-radius: 20px; border: none; cursor: pointer; font-weight: bold; font-size: 1rem; font-family: 'Roboto', sans-serif; }
+.block-btn-confirm { background-color: var(--cor-erro); color: white; }
+.block-btn-cancel { background-color: transparent; color: white; border: 1px solid #555; }
+
+.repost-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cor-texto-secundario);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.repost-info i {
+    font-size: 1rem;
+}
+
+.edit-post-textarea {
+    width: 100%;
+    min-height: 100px;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 5px;
+    padding: 0.8rem;
+    color: var(--cor-texto-primario);
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+.edit-post-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.edit-post-actions button {
+    font-family: var(--fonte-principal);
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.save-edit-btn {
+    background-color: var(--cor-primaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+.save-edit-btn:hover {
+    opacity: 0.9;
+}
+
+.cancel-edit-btn {
+    background-color: transparent;
+    color: var(--cor-texto-secundario);
+    border-color: var(--cor-texto-secundario);
+}
+
+.cancel-edit-btn:hover {
+    background-color: #333;
+}
+
+.comment-actions {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.comment-body:hover .comment-actions {
+    opacity: 1;
+}
+
+.comment-actions button {
+    background: none;
+    border: none;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+/* *** MODIFICADO *** */
+.post-gif {
+  max-width: 100%;
+  max-height: 400px;  /* *** NOVO LIMITE DE ALTURA MÁXIMA (pode ser diferente se quiser) *** */
+  display: block;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  object-fit: contain; /* *** GARANTE QUE A IMAGEM APAREÇA INTEIRA *** */
+  background-color: #000; /* Fundo preto para áreas vazias */
+}
+
+.post-text-content > img.post-gif:only-child {
+    margin-top: 0;
+}
+
+.post-content > .post-text-content > img.post-gif:only-child {
+     margin-bottom: 0.5rem;
+}
+
+.comment-actions button:hover {
+    background-color: #3f3f3f;
+}
+
+.edit-comment-btn:hover {
+    color: var(--cor-secundaria);
+}
+
+.delete-comment-btn:hover {
+    color: var(--cor-erro);
+}
+
+.edit-comment-textarea {
+    width: 100%;
+    background-color: #1a1a1a;
+    border: 1px solid var(--cor-secundaria);
+    color: var(--cor-texto-primario);
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+}
+
+.edit-comment-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.edit-comment-actions button {
+    font-family: var(--fonte-principal);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.save-edit-comment-btn {
+    background-color: var(--cor-secundaria);
+    color: black;
+    border-color: var(--cor-secundaria);
+}
+
+.cancel-edit-comment-btn {
+    background: transparent;
+    color: #999;
+    border-color: #555;
+}
+
+/* Adicionado para responsividade em telas pequenas */
+@media (max-width: 380px) {
+    .comment-body {
+        /* Usamos flexbox para reordenar os elementos */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .comment-author, .comment-text {
+        /* Itens principais ficam na ordem padrão (topo) */
+        order: 1;
+    }
+
+    .comment-actions {
+        /* Ações vão para o final */
+        order: 2;
+        /* Alinha as ações à direita */
+        align-self: flex-end;
+        /* Remove o posicionamento absoluto e garante a visibilidade */
+        position: static;
+        opacity: 1;
+        /* Adiciona um espaço acima dos botões */
+        margin-top: 8px;
+        /* Aumenta a margem para mover mais para a esquerda */
+        margin-right: 75%;
+    }
+}

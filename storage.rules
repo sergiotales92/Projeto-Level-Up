@@ -1,0 +1,22 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Regra genérica (se precisar)
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Regra específica para fotos de perfil
+     match /profile-pictures/{userId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // NOVA REGRA PARA IMAGENS DE POSTS
+    match /posts/{userId}/{allPaths=**} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
